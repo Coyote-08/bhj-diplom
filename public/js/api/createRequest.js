@@ -7,32 +7,30 @@ const createRequest = (options = {}) => {
     const xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
-    try {
-        if (options.method === 'GET') {
-            let queryString = '';
+    let url = options.url;
+    let body;
 
-            for (let i in options.data) {
+    if (options.method === 'GET') {
 
-                queryString += i + '=' + options.data[i] + '&';
-            }
-
-            xhr.open('GET', options.url + '?' + queryString);
-            xhr.send();
+        let queryString = '';
+        
+        for (let i in options.data) {
+            queryString += i + '=' + options.data[i] + '&';
         }
+        url += '?' + queryString;
+    } else {
 
-        else {
-            const formData = new FormData();
+        body = new FormData();
 
-            for (let i in options.data) {
-
-                formData.append(i, options.data[i]);
-            }
-
-            xhr.open(options.method, options.url);
-            xhr.send(formData);
+        for (let i in options.data) {
+            body.append(i, options.data[i]);
         }
     }
-    catch (e) {
+
+    try {
+        xhr.open(options.method, url);
+        xhr.send(body);
+    } catch (e) {
         options.callback(e);
     }
 

@@ -30,15 +30,7 @@ class User {
      * из локального хранилища
      * */
     static current() {
-
-        let current = JSON.parse(localStorage.getItem('user'));
-
-        if (current === null) {
-            return undefined
-        }
-        else {
-            return current
-        }
+        return JSON.parse(localStorage.getItem('user'));
     }
 
     /**

@@ -18,9 +18,7 @@ class AccountsWidget {
         if (!element) {
             throw new Error('Error')
         }
-        else {
-            this.element = element;
-        }
+        this.element = element;
         this.registerEvents();
         this.update();
     }

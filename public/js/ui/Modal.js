@@ -16,9 +16,7 @@ class Modal {
         if (!element) {
             throw new Error('Error')
         }
-        else {
-            this.element = element;
-        }
+        this.element = element;
         this.registerEvents()
     }
 
